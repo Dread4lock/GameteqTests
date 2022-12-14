@@ -97,7 +97,20 @@ namespace GameteqTests
             offersList.TapAddButton();
             Thread.Sleep(1000);
             addEntity.SetKey("Test");
+        }
 
+        [Test]
+        public void SelectCategoryTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.SelectCategory(5);
+            Thread.Sleep(7000);
         }
 
 

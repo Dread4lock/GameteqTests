@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V106.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace GameteqTests
         By NameBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[2]/mat-card-content/mat-form-field[1]/div/div[1]/div/input");
         By NameField = By.XPath("//*[@id=\"mat-input-0\"]");
         By KeyField = By.XPath("//*[@id=\"mat-input-1\"]");
+        By CategoryField = By.XPath("//*[@id=\"mat-input-2\"]/option[3]");
 
         public AddEntityPageObject(IWebDriver _driver)
         {
@@ -37,9 +39,9 @@ namespace GameteqTests
 
         public AddEntityPageObject SetName(string name)
         {
-            Thread.Sleep (1000);
+            Thread.Sleep(1000);
             driver.FindElement(NameField).SendKeys(name);
-            Thread.Sleep(1000); 
+            Thread.Sleep(1000);
             return this;
         }
 
@@ -48,6 +50,28 @@ namespace GameteqTests
             Thread.Sleep(1000);
             driver.FindElement(KeyField).SendKeys(key);
             Thread.Sleep(1000);
+            return this;
+        }
+
+
+        /// <summary>
+        /// Select category from list. Start count from 1 to 14
+        /// </summary>
+        /// <param name="categoryIterator">
+        /// Should be from 1 to 14
+        /// </param>
+        /// <returns></returns>
+        public AddEntityPageObject SelectCategory(int categoryIterator)
+        {
+            By xPath = By.XPath("//*[@id=\"mat-input-2\"]/option[" + categoryIterator + "]");
+
+            driver
+                  .Manage()
+                  .Timeouts()
+                  .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(xPath)
+                .Click();
             return this;
         }
 
