@@ -69,7 +69,35 @@ namespace GameteqTests
             offersList.TapAddButton();
             Thread.Sleep(1000);
             addEntity.TapForTestCheckBox();
- 
+
+        }
+
+        [Test]
+        public void SetNameTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.SetName("Alex");
+
+        }
+
+        [Test]
+        public void SetKeyTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.SetKey("Test");
+
         }
 
 
