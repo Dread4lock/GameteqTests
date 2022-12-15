@@ -11,7 +11,7 @@ namespace GameteqTests
     {
         //https://test-task.gameteq.com/list - OffersList Link
 
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
 
         By AddButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/button");
         By EditButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/table/tbody/tr[1]/td[4]/button[1]");

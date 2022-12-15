@@ -12,7 +12,7 @@ namespace GameteqTests
     {
         //"https://test-task.gameteq.com/add" - Add Entity link
 
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
 
         By ForTestCheckBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[1]/mat-card-title/div/mat-checkbox/label");
         By NameBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[2]/mat-card-content/mat-form-field[1]/div/div[1]/div/input");
@@ -20,6 +20,8 @@ namespace GameteqTests
         By KeyField = By.XPath("//*[@id=\"mat-input-1\"]");
         By CategoryField = By.XPath("//*[@id=\"mat-input-2\"]/option[3]");
         By AddCategoryButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[1]/div/div[1]/div[2]/button");
+        By AddNetworksButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[1]/div[2]/button");
+
 
 
         public AddEntityPageObject(IWebDriver _driver)
@@ -79,6 +81,9 @@ namespace GameteqTests
 
         public AddEntityPageObject TapAddCategoryButton()
         {
+            //NetworksAddButton
+            //GroupAddButton
+            //SegmentsAddButton
             driver
                   .Manage()
                   .Timeouts()
@@ -89,5 +94,19 @@ namespace GameteqTests
             return this;
         }
 
+        public AddEntityPageObject TapAddNetworksButton()
+        {
+            //NetworksAddButton
+            //GroupAddButton
+            //SegmentsAddButton
+            driver
+                  .Manage()
+                  .Timeouts()
+                  .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(AddNetworksButton)
+                .Click();
+            return this;
+        }
     }
 }

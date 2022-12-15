@@ -113,7 +113,7 @@ namespace GameteqTests
         }
 
         [Test]
-        public void AddCategoryTest()
+        public void TapAddCategoryTest()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
@@ -123,7 +123,21 @@ namespace GameteqTests
             offersList.TapAddButton();
             Thread.Sleep(1000);
             addEntity.TapAddCategoryButton();
-            Thread.Sleep(3000);
+            Thread.Sleep(5000);
+        }
+
+        [Test]
+        public void TapAddNetworkTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddNetworksButton();
+            Thread.Sleep(5000);
         }
 
 
