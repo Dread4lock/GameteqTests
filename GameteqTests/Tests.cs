@@ -5,7 +5,7 @@ namespace GameteqTests
 {
     public class Tests
     {
-        private IWebDriver driver;
+        private IWebDriver driver; 
 
         [SetUp]
         public void Setup()
@@ -99,7 +99,7 @@ namespace GameteqTests
             addEntity.SetKey("Test");
         }
 
-        [Test]
+        [Test] 
         public void SelectCategoryTest()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -109,8 +109,21 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.SelectCategory(5);
-            Thread.Sleep(7000);
+            addEntity.SelectCategory(2); 
+        }
+
+        [Test]
+        public void AddCategoryTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddCategoryButton();
+            Thread.Sleep(3000);
         }
 
 

@@ -19,6 +19,8 @@ namespace GameteqTests
         By NameField = By.XPath("//*[@id=\"mat-input-0\"]");
         By KeyField = By.XPath("//*[@id=\"mat-input-1\"]");
         By CategoryField = By.XPath("//*[@id=\"mat-input-2\"]/option[3]");
+        By AddCategoryButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[1]/div/div[1]/div[2]/button");
+
 
         public AddEntityPageObject(IWebDriver _driver)
         {
@@ -71,6 +73,18 @@ namespace GameteqTests
                   .ImplicitWait = TimeSpan.FromSeconds(10);
             driver
                 .FindElement(xPath)
+                .Click();
+            return this;
+        }
+
+        public AddEntityPageObject TapAddCategoryButton()
+        {
+            driver
+                  .Manage()
+                  .Timeouts()
+                  .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(AddCategoryButton)
                 .Click();
             return this;
         }
