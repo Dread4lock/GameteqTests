@@ -5,7 +5,7 @@ namespace GameteqTests
 {
     public class Tests
     {
-        private IWebDriver driver; 
+        private IWebDriver driver;
 
         [SetUp]
         public void Setup()
@@ -99,7 +99,7 @@ namespace GameteqTests
             addEntity.SetKey("Test");
         }
 
-        [Test] 
+        [Test]
         public void SelectCategoryTest()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
@@ -109,7 +109,7 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.SelectCategory(2); 
+            addEntity.SelectCategory(2);
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.TapAddCategoryButton(); 
+            addEntity.TapAddCategoryButton();
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.TapAddNetworksButton(); 
+            addEntity.TapAddNetworksButton();
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.TapAddGroupButton(); 
+            addEntity.TapAddGroupButton();
         }
 
         [Test]
@@ -162,10 +162,21 @@ namespace GameteqTests
             offersList.TapAddButton();
             Thread.Sleep(1000);
             addEntity.TapAddSegmentsButton();
-            Thread.Sleep(3000);
 
         }
 
+        [Test]
+        public void EnterTextAddCategoryTest()
+        {
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddCategoryButton();
+            addEntity.EnterTextAddButton("test");
+            Thread.Sleep(2000);
+        }
 
         [TearDown]
         public void TearDown()

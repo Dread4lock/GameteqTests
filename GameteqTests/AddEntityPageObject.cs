@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V106.Network;
+using OpenQA.Selenium.Interactions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,10 @@ namespace GameteqTests
         By AddCategoryButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[1]/div/div[1]/div[2]/button");
         By AddNetworksButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[1]/div[2]/button");
         By AddGroupButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[3]/div/div[1]/div[2]/button");
-        By AddSegmentsButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-title/button");       
+        By AddSegmentsButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-title/button");
+        By EnterTextDialogContainer = By.XPath("//*[@id=\"cdk-overlay-0\"]");
+        By TextFieldAddButton = By.XPath("//*[@id=\"mat-input-3\"]");
+
 
         public AddEntityPageObject(IWebDriver _driver)
         {
@@ -80,7 +84,7 @@ namespace GameteqTests
         }
 
         public AddEntityPageObject TapAddCategoryButton()
-        { 
+        {
             driver
                   .Manage()
                   .Timeouts()
@@ -93,8 +97,6 @@ namespace GameteqTests
 
         public AddEntityPageObject TapAddNetworksButton()
         {
-            
-           
             driver
                   .Manage()
                   .Timeouts()
@@ -126,6 +128,15 @@ namespace GameteqTests
             driver
                 .FindElement(AddSegmentsButton)
                 .Click();
+            return this;
+        }
+
+        public AddEntityPageObject EnterTextAddButton(string inputText)
+        {
+            Thread.Sleep(1000);
+            driver.FindElement(EnterTextDialogContainer).Click();
+            driver.FindElement(TextFieldAddButton).SendKeys(inputText);
+            Thread.Sleep(2000);
             return this;
         }
     }
