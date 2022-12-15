@@ -200,9 +200,25 @@ namespace GameteqTests
             offersList.TapAddButton();
             Thread.Sleep(1000);
             addEntity.TapAddCategoryButton();
-            addEntity.CreateNewEntityCategoryButton("CREATE_THIS");
-            Thread.Sleep(2000);
+            addEntity.CreateNewEntityButton("CREATE_THIS");
+            Thread.Sleep(1000);
         }
+
+        [Test]
+        public void CreateNewNetworkTest()
+        {
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddNetworksButton();  
+            Thread.Sleep(1000);
+            addEntity.CreateNewEntityButton("NEW_NETWORK");
+            Thread.Sleep(1000);
+        }
+
+
 
         [TearDown]
         public void TearDown()

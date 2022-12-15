@@ -153,7 +153,7 @@ namespace GameteqTests
             return this;
         }
 
-        public AddEntityPageObject CreateNewEntityCategoryButton(string input)
+        public AddEntityPageObject CreateNewEntityButton(string input)
         {
             Thread.Sleep(1000);
             driver.FindElement(EnterTextDialogContainer).Click();
@@ -164,5 +164,7 @@ namespace GameteqTests
                 .Click();
             return this;
         }
+
+        
     }
 }
