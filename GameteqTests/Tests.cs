@@ -178,6 +178,32 @@ namespace GameteqTests
             Thread.Sleep(2000);
         }
 
+        [Test]
+        public void CancelEnteredTextCategoryTest()
+        {
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddCategoryButton();
+            addEntity.CancelEnteredTextAddButton("CANCEL_THIS");
+            Thread.Sleep(2000);
+        }
+
+        [Test]
+        public void CreateNewEntityCategoryTest()
+        {
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddCategoryButton();
+            addEntity.CreateNewEntityCategoryButton("CREATE_THIS");
+            Thread.Sleep(2000);
+        }
+
         [TearDown]
         public void TearDown()
         {

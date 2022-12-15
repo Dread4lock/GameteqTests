@@ -26,7 +26,8 @@ namespace GameteqTests
         By AddSegmentsButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-title/button");
         By EnterTextDialogContainer = By.XPath("//*[@id=\"cdk-overlay-0\"]");
         By TextFieldAddButton = By.XPath("//*[@id=\"mat-input-3\"]");
-
+        By CancelButton = By.XPath("//*[@id=\"mat-dialog-0\"]/app-form-simple/div[2]/button[1]");
+        By CreateButton = By.XPath("//*[@id=\"mat-dialog-0\"]/app-form-simple/div[2]/button[2]");
 
         public AddEntityPageObject(IWebDriver _driver)
         {
@@ -136,7 +137,31 @@ namespace GameteqTests
             Thread.Sleep(1000);
             driver.FindElement(EnterTextDialogContainer).Click();
             driver.FindElement(TextFieldAddButton).SendKeys(inputText);
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
+            return this;
+        }
+
+        public AddEntityPageObject CancelEnteredTextAddButton(string input)
+        {
+            Thread.Sleep(1000);
+            driver.FindElement(EnterTextDialogContainer).Click();
+            driver.FindElement(TextFieldAddButton).SendKeys(input);
+            Thread.Sleep(1000); 
+            driver
+                .FindElement(CancelButton)
+                .Click();
+            return this;
+        }
+
+        public AddEntityPageObject CreateNewEntityCategoryButton(string input)
+        {
+            Thread.Sleep(1000);
+            driver.FindElement(EnterTextDialogContainer).Click();
+            driver.FindElement(TextFieldAddButton).SendKeys(input);
+            Thread.Sleep(1000);
+            driver
+                .FindElement(CreateButton)
+                .Click();
             return this;
         }
     }
