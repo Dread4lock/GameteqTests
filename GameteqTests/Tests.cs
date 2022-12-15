@@ -218,6 +218,19 @@ namespace GameteqTests
             Thread.Sleep(1000);
         }
 
+        [Test]
+        public void CreateNewGroupTest()
+        {
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddGroupButton();
+            Thread.Sleep(1000);
+            addEntity.CreateNewEntityButton("NEW_GROUP");
+            Thread.Sleep(1000);
+        }
 
 
         [TearDown]
