@@ -122,8 +122,7 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.TapAddCategoryButton();
-            Thread.Sleep(5000);
+            addEntity.TapAddCategoryButton(); 
         }
 
         [Test]
@@ -136,8 +135,35 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.TapAddNetworksButton();
-            Thread.Sleep(5000);
+            addEntity.TapAddNetworksButton(); 
+        }
+
+        [Test]
+        public void TapAddGroupTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddGroupButton(); 
+        }
+
+        [Test]
+        public void TapAddSegmentsTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.TapAddSegmentsButton();
+            Thread.Sleep(3000);
+
         }
 
 

@@ -21,8 +21,8 @@ namespace GameteqTests
         By CategoryField = By.XPath("//*[@id=\"mat-input-2\"]/option[3]");
         By AddCategoryButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[1]/div/div[1]/div[2]/button");
         By AddNetworksButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[1]/div[2]/button");
-
-
+        By AddGroupButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[3]/div/div[1]/div[2]/button");
+        By AddSegmentsButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-title/button");       
 
         public AddEntityPageObject(IWebDriver _driver)
         {
@@ -80,10 +80,7 @@ namespace GameteqTests
         }
 
         public AddEntityPageObject TapAddCategoryButton()
-        {
-            //NetworksAddButton
-            //GroupAddButton
-            //SegmentsAddButton
+        { 
             driver
                   .Manage()
                   .Timeouts()
@@ -96,15 +93,38 @@ namespace GameteqTests
 
         public AddEntityPageObject TapAddNetworksButton()
         {
-            //NetworksAddButton
-            //GroupAddButton
-            //SegmentsAddButton
+            
+           
             driver
                   .Manage()
                   .Timeouts()
                   .ImplicitWait = TimeSpan.FromSeconds(10);
             driver
                 .FindElement(AddNetworksButton)
+                .Click();
+            return this;
+        }
+
+        public AddEntityPageObject TapAddGroupButton()
+        {
+            driver
+                  .Manage()
+                  .Timeouts()
+                  .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(AddGroupButton)
+                .Click();
+            return this;
+        }
+
+        public AddEntityPageObject TapAddSegmentsButton()
+        {
+            driver
+                  .Manage()
+                  .Timeouts()
+                  .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(AddSegmentsButton)
                 .Click();
             return this;
         }
