@@ -256,7 +256,7 @@ namespace GameteqTests
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
             Thread.Sleep(1000);
-            addEntityPageObject.SelectGroup(); 
+            addEntityPageObject.SelectGroup();
         }
 
         [Test]
@@ -266,7 +266,7 @@ namespace GameteqTests
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
-            Thread.Sleep(1000); 
+            Thread.Sleep(1000);
             addEntityPageObject.TapAddSegmentsButton();
         }
 
@@ -300,7 +300,7 @@ namespace GameteqTests
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
-            addEntityPageObject.TapAndButton(); 
+            addEntityPageObject.TapAndButton();
         }
 
         [Test]
@@ -310,9 +310,30 @@ namespace GameteqTests
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
-            addEntityPageObject.TapAddGroupBottomPinkButton();
-            Thread.Sleep(5000);
+            addEntityPageObject.TapAddGroupSegmentPinkButton(); 
         }
+
+        [Test]
+        public void TapDeleteGroupButton()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            addEntityPageObject.TapAddGroupSegmentPinkButton();
+            addEntityPageObject.TapDeleteSegmentButton(); 
+        }
+        
+        [Test]
+        public void TapAddSegmentButton()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton(); 
+            addEntityPageObject.TapAddSegmentButton();
+        }
+
 
         [TearDown]
         public void TearDown()
