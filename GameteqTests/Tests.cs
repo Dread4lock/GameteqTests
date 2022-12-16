@@ -300,7 +300,18 @@ namespace GameteqTests
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
-            addEntityPageObject.TapAndButton();
+            addEntityPageObject.TapAndButton(); 
+        }
+
+        [Test]
+        public void TapAddGroupBottomPinkButtonTest()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            addEntityPageObject.TapAddGroupBottomPinkButton();
+            Thread.Sleep(5000);
         }
 
         [TearDown]

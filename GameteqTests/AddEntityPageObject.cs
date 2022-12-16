@@ -269,9 +269,30 @@ namespace GameteqTests
             driver
                 .FindElement(AndButton)
                 .Click();
-            Thread.Sleep(5000);
-
+            Thread.Sleep(1000); 
             return this;
+        }
+
+        public AddEntityPageObject TapAddGroupBottomPinkButton()
+        {
+            By AddGroupBottomPinkButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/div/button[1]");
+            driver
+                 .Manage()
+                 .Timeouts()
+                 .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(OrButtonArea)
+                .Click();
+            driver
+                .Manage()
+                .Timeouts()
+                .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(AddGroupBottomPinkButton)
+                .Click();
+            Thread.Sleep(2000);
+            return this;
+
         }
     }
 }
