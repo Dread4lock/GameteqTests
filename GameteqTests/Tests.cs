@@ -109,7 +109,8 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.SelectCategory(2);
+            addEntity.SelectCategory(7);
+            Thread.Sleep(1000);
         }
 
         [Test]
@@ -212,7 +213,7 @@ namespace GameteqTests
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
-            addEntity.TapAddNetworksButton();  
+            addEntity.TapAddNetworksButton();
             Thread.Sleep(1000);
             addEntity.CreateNewEntityButton("NEW_NETWORK");
             Thread.Sleep(1000);
@@ -232,6 +233,31 @@ namespace GameteqTests
             Thread.Sleep(1000);
         }
 
+        [Test]
+        public void SelectNetworkTest()
+        {
+            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
+            OffersListPageObject offersList = new OffersListPageObject(driver);
+            AddEntityPageObject addEntity = new AddEntityPageObject(driver);
+            mainMenu.NavigateToMain();
+            offersList.NavigateToOffersList();
+            offersList.TapAddButton();
+            Thread.Sleep(1000);
+            addEntity.SelectNetwork();
+            Thread.Sleep(6000);
+        }
+
+        [Test]
+        public void SelectGroupTest()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            Thread.Sleep(1000);
+            addEntityPageObject.SelectGroup();
+           // Thread.Sleep(4000);
+        }
 
         [TearDown]
         public void TearDown()

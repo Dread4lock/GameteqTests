@@ -12,10 +12,10 @@ namespace GameteqTests
     {
         //"https://test-task.gameteq.com/dashboard" - MainMenu link
 
-        private readonly IWebDriver driver; 
+        private readonly IWebDriver driver;
 
-        By MenuSwitcher = By.XPath("/html/body/app-root/mat-toolbar/mat-toolbar-row/mat-slide-toggle/label/div/div/div[1]");
-        By OffersSideButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav/div/div/button[2]");
+        private readonly By MenuSwitcher = By.XPath("/html/body/app-root/mat-toolbar/mat-toolbar-row/mat-slide-toggle/label/div/div/div[1]");
+        private readonly By OffersSideButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav/div/div/button[2]");
          
         public MainMenuPageObject(IWebDriver _driver)
         {

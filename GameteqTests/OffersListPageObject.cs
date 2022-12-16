@@ -13,9 +13,9 @@ namespace GameteqTests
 
         private readonly IWebDriver driver;
 
-        By AddButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/button");
-        By EditButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/table/tbody/tr[1]/td[4]/button[1]");
-        By DeleteButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/table/tbody/tr[1]/td[4]/button[2]");
+        private readonly By AddButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/button");
+        private readonly By EditButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/table/tbody/tr[1]/td[4]/button[1]");
+        private readonly By DeleteButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/table/tbody/tr[1]/td[4]/button[2]");
 
         public OffersListPageObject NavigateToOffersList()
         {

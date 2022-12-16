@@ -1,11 +1,13 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools.V106.Network;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GameteqTests
 {
@@ -15,19 +17,31 @@ namespace GameteqTests
 
         private readonly IWebDriver driver;
 
-        By ForTestCheckBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[1]/mat-card-title/div/mat-checkbox/label");
-        By NameBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[2]/mat-card-content/mat-form-field[1]/div/div[1]/div/input");
-        By NameField = By.XPath("//*[@id=\"mat-input-0\"]");
-        By KeyField = By.XPath("//*[@id=\"mat-input-1\"]");
-        By CategoryField = By.XPath("//*[@id=\"mat-input-2\"]/option[3]");
-        By AddCategoryButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[1]/div/div[1]/div[2]/button");
-        By AddNetworksButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[1]/div[2]/button");
-        By AddGroupButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[3]/div/div[1]/div[2]/button");
-        By AddSegmentsButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-title/button");
-        By EnterTextDialogContainer = By.XPath("//*[@id=\"cdk-overlay-0\"]");
-        By TextFieldAddButton = By.XPath("//*[@id=\"mat-input-3\"]");
-        By CancelButton = By.XPath("//*[@id=\"mat-dialog-0\"]/app-form-simple/div[2]/button[1]");
-        By CreateButton = By.XPath("//*[@id=\"mat-dialog-0\"]/app-form-simple/div[2]/button[2]");
+        #region PageData
+
+        private readonly By ForTestCheckBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[1]/mat-card-title/div/mat-checkbox/label");
+        private readonly By NameBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[2]/mat-card-content/mat-form-field[1]/div/div[1]/div/input");
+        private readonly By NameField = By.XPath("//*[@id=\"mat-input-0\"]");
+        private readonly By KeyField = By.XPath("//*[@id=\"mat-input-1\"]");
+        private readonly By CategoryField = By.XPath("//*[@id=\"mat-input-2\"]/option[3]");
+        private readonly By AddCategoryButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[1]/div/div[1]/div[2]/button");
+        private readonly By AddNetworksButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[1]/div[2]/button");
+        private readonly By AddGroupButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[3]/div/div[1]/div[2]/button");
+        private readonly By AddSegmentsButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-title/button");
+        private readonly By EnterTextDialogContainer = By.XPath("//*[@id=\"cdk-overlay-0\"]");
+        private readonly By TextFieldAddButton = By.XPath("//*[@id=\"mat-input-3\"]");
+        private readonly By CancelButton = By.XPath("//*[@id=\"mat-dialog-0\"]/app-form-simple/div[2]/button[1]");
+        private readonly By CreateButton = By.XPath("//*[@id=\"mat-dialog-0\"]/app-form-simple/div[2]/button[2]");
+        private readonly By FaceBook = By.XPath("//*[@id=\"mat-option-0\"]/span");
+        private readonly By NetworksWord = By.XPath("//*[@id=\"mat-select-0\"]");
+        private readonly By GroupWord = By.XPath("//*[@id=\"mat-select-1\"]");
+        private readonly By GroupsList = By.XPath("//*[@id=\"cdk-overlay-0\"]/div/div");
+        private readonly By EngineersWord = By.CssSelector("#mat-option-23 > span"); 
+
+        
+        // private readonly By NetworksList = By.XPath("//*[@id=\"mat-select-0\"]");
+
+        #endregion
 
         public AddEntityPageObject(IWebDriver _driver)
         {
@@ -146,7 +160,7 @@ namespace GameteqTests
             Thread.Sleep(1000);
             driver.FindElement(EnterTextDialogContainer).Click();
             driver.FindElement(TextFieldAddButton).SendKeys(input);
-            Thread.Sleep(1000); 
+            Thread.Sleep(1000);
             driver
                 .FindElement(CancelButton)
                 .Click();
@@ -165,6 +179,76 @@ namespace GameteqTests
             return this;
         }
 
-        
+        public AddEntityPageObject SelectNetwork()
+        { 
+            driver
+                  .Manage()
+                  .Timeouts()
+                  .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(NetworksWord)
+                //.FindElement(NetworksList)
+                .Click();
+            Thread.Sleep(1000);
+            Boolean isFacebookVisible = driver.FindElement(FaceBook).Displayed;
+            if (isFacebookVisible)
+            {
+                driver
+                    .FindElement(FaceBook)
+                    .Click();
+                Thread.Sleep(3000);
+            }
+            else
+            {
+                Assert.Fail();
+            }
+            //TODO: Добавь выход из списка элементов после выбора фейсбука. Не видит лэйбл заголовок страницы
+
+            #region Try
+            //By Logo = By.XPath("/html/body/app-root/mat-toolbar/mat-toolbar-row/span");
+            //By LineBelow = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[2]");
+            //IWebElement Head = driver.FindElement(Logo);
+            //IWebElement Test = driver.FindElement(NetworksList);
+            //IWebElement Test2 = driver.FindElement(AddCategoryButton);
+
+            //Actions _action = new Actions(driver);
+            //_action.MoveToElement(Test).Click();
+            //_action.MoveToElement(Test2).Click();
+            //_action.MoveToElement(Head).Click();
+            //Thread.Sleep(2000);
+
+            //  By TitleLogo = By.XPath("//html/body/app-root/mat-toolbar/mat-toolbar-row/span");
+            // driver.FindElement(By.CssSelector("body > app-root > mat-toolbar > mat-toolbar-row > span")).Click();
+            #endregion
+
+            return this;
+        }
+
+        public AddEntityPageObject SelectGroup()
+        {
+            driver
+                 .Manage()
+                 .Timeouts()
+                 .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(GroupWord)
+                .Click();
+            Thread.Sleep(1000);
+
+            driver
+                .FindElement(EngineersWord)
+                .Click();
+
+            //driver
+            //    .FindElement(GroupsList)
+            //    .Click();                   //- asdaf
+            //Thread.Sleep(1000);
+
+            //driver
+            //    .FindElement(EngineersWord)
+            //    .Click();
+            Thread.Sleep(4000);
+            return this;
+        }
     }
 }
