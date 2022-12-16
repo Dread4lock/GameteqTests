@@ -1,9 +1,4 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameteqTests
 {
@@ -20,7 +15,7 @@ namespace GameteqTests
         public OffersListPageObject NavigateToOffersList()
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
-            mainMenu.NavigateToMain(); 
+            mainMenu.NavigateToMain();
             mainMenu.TapMenuSwitcher();
             mainMenu.TapOffers();
             return this;

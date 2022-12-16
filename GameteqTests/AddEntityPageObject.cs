@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V106.Debugger;
 using OpenQA.Selenium.DevTools.V106.Network;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace GameteqTests
@@ -20,11 +22,12 @@ namespace GameteqTests
         #region PageData
 
         private readonly By ForTestCheckBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[1]/mat-card-title/div/mat-checkbox/label");
-        
+        private readonly By SaveButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[1]/mat-card-title/div/button");
+        //Base info
         private readonly By NameBox = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[2]/mat-card-content/mat-form-field[1]/div/div[1]/div/input");
         private readonly By NameField = By.XPath("//*[@id=\"mat-input-0\"]");
         private readonly By KeyField = By.XPath("//*[@id=\"mat-input-1\"]");
-
+        //Networks, Category and Group
         private readonly By CategoryField = By.XPath("//*[@id=\"mat-input-2\"]/option[3]");
         private readonly By AddCategoryButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[1]/div/div[1]/div[2]/button");
         private readonly By AddNetworksButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[1]/div[2]/button");
@@ -37,15 +40,17 @@ namespace GameteqTests
         private readonly By FaceBook = By.XPath("//*[@id=\"mat-option-0\"]/span");
         private readonly By NetworksWord = By.XPath("//*[@id=\"mat-select-0\"]");
         private readonly By GroupWord = By.XPath("//*[@id=\"mat-select-1\"]");
-        private readonly By GroupsList = By.XPath("//*[@id=\"cdk-overlay-0\"]/div/div");
-        private readonly By EngineersWord = By.CssSelector("#mat-option-23 > span");
-
+        private readonly By GroupsList = By.XPath("//html/body/div[2]/div[2]/div/div/div");
+        private readonly By EngineersWord = By.XPath("/html/body/div[2]/div[2]/div/div/div/mat-option[1]");
+        //Segments
         private readonly By OrButtonArea = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/mat-radio-group/mat-radio-button[1]");
         private readonly By OrButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/mat-radio-group/mat-radio-button[1]/label/div[2]");
         private readonly By AndButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/mat-radio-group/mat-radio-button[2]/label/div[2]");
         private readonly By AddGroupBottomButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/div/button[1]");
-        private readonly By DeleteGroupSegmentButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-content/app-form-segments/mat-card/mat-card-title/div/button[3]");
-
+        private readonly By DeleteGroupButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-content/app-form-segments/mat-card/mat-card-title/div/button[3]");
+        private readonly By AddSegmentButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/div/button[2]");
+        private readonly By DeleteSegmentButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-content/div/button");
+        private readonly By DeleteSegment2Button = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-content/div[2]/button");
         #endregion
 
         public AddEntityPageObject(IWebDriver _driver)
@@ -192,7 +197,6 @@ namespace GameteqTests
                   .ImplicitWait = TimeSpan.FromSeconds(10);
             driver
                 .FindElement(NetworksWord)
-                //.FindElement(NetworksList)
                 .Click();
             Thread.Sleep(1000);
             Boolean isFacebookVisible = driver.FindElement(FaceBook).Displayed;
@@ -200,32 +204,15 @@ namespace GameteqTests
             {
                 driver
                     .FindElement(FaceBook)
-                    .Click();
-                Thread.Sleep(3000);
+                    .Click(); 
             }
             else
             {
                 Assert.Fail();
             }
-            //TODO: Добавь выход из списка элементов после выбора фейсбука. Не видит лэйбл заголовок страницы
-
-            #region Try
-            //By Logo = By.XPath("/html/body/app-root/mat-toolbar/mat-toolbar-row/span");
-            //By LineBelow = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[3]/mat-card-content/mat-form-field[2]/div/div[2]");
-            //IWebElement Head = driver.FindElement(Logo);
-            //IWebElement Test = driver.FindElement(NetworksList);
-            //IWebElement Test2 = driver.FindElement(AddCategoryButton);
-
-            //Actions _action = new Actions(driver);
-            //_action.MoveToElement(Test).Click();
-            //_action.MoveToElement(Test2).Click();
-            //_action.MoveToElement(Head).Click();
-            //Thread.Sleep(2000);
-
-            //  By TitleLogo = By.XPath("//html/body/app-root/mat-toolbar/mat-toolbar-row/span");
-            // driver.FindElement(By.CssSelector("body > app-root > mat-toolbar > mat-toolbar-row > span")).Click();
-            #endregion
-
+            var element = driver.FindElement(SaveButton);
+            new Actions(driver).MoveToElement(element).MoveByOffset(0, 0).Click().Perform();
+            Thread.Sleep(4000);
             return this;
         }
 
@@ -238,12 +225,9 @@ namespace GameteqTests
             driver
                 .FindElement(GroupWord)
                 .Click();
-            Thread.Sleep(1000);
-
             driver
                 .FindElement(EngineersWord)
                 .Click();
-            Thread.Sleep(1000);
             return this;
         }
 
@@ -299,6 +283,34 @@ namespace GameteqTests
             return this;
         }
 
+        public AddEntityPageObject TapDeleteGroupButton()
+        {
+            driver
+                .Manage()
+                .Timeouts()
+                .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(OrButtonArea)
+                .Click();
+            driver
+                .FindElement(DeleteGroupButton)
+                .Click();
+            return this;
+        }
+
+        public AddEntityPageObject TapAddSegmentButton()
+        {
+            driver
+                .Manage()
+                .Timeouts()
+                .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(AddSegmentButton)
+                .Click();
+            Thread.Sleep(3000);
+            return this;
+        }
+
         public AddEntityPageObject TapDeleteSegmentButton()
         {
             driver
@@ -308,26 +320,60 @@ namespace GameteqTests
             driver
                 .FindElement(OrButtonArea)
                 .Click();
+            TapAddSegmentButton();
             driver
-                .FindElement(DeleteGroupSegmentButton)
+                .FindElement(DeleteSegmentButton)
                 .Click();
+            Thread.Sleep(3000);
             return this;
         }
 
-        public AddEntityPageObject TapAddSegmentButton()
+        public AddEntityPageObject IsAllSegmentsDeleted()
         {
-            By AddSegmentButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/div/button[2]");
+            if (driver.FindElements(By.XPath("/html/body/app-root/mat-sidenav-container/" +
+                "mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/" +
+                "app-form-segments/mat-card/mat-card-content/div/button")) != null)
+            {
+                driver.FindElement(DeleteSegmentButton).Click();
+            }
+
+            return this;
+        }
+
+        public AddEntityPageObject TapSaveButton()
+        {
+            By test = By.XPath("<div class=\"cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing\"></div>");
             driver
                 .Manage()
                 .Timeouts()
                 .ImplicitWait = TimeSpan.FromSeconds(10);
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scrollTo(0, 0)");
+            Thread.Sleep(1000);
             driver
-                .FindElement(OrButtonArea)
+                .FindElement(SaveButton)
                 .Click();
-            driver
-                .FindElement(AddSegmentButton)
-                .Click();
-            Thread.Sleep(3000);
+            return this;
+        }
+
+        public AddEntityPageObject CreateUserEntity()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+
+            //EnterBase info
+            addEntityPageObject.SetName("Челбос");
+            addEntityPageObject.SetKey("Ключ");
+            //Networks, Category and Group
+            addEntityPageObject.SelectNetwork();
+            addEntityPageObject.SelectCategory(2);
+            addEntityPageObject.SelectGroup();
+            //Segments 
+            addEntityPageObject.TapAddGroupSegmentPinkButton();
+            addEntityPageObject.TapSaveButton();
+
             return this;
         }
     }

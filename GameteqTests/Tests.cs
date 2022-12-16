@@ -1,6 +1,4 @@
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 
 namespace GameteqTests
 {
@@ -16,6 +14,37 @@ namespace GameteqTests
 
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            driver.Quit();
+        }
+
+        [Test]
+        [TestCase(TestName = "End To End Final Test")]
+        public void E2eTest()
+        {  
+            //Arrange
+            MainMenuPageObject mainMenuPageObject = new MainMenuPageObject(driver);
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            By CreatedUserEditButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-list/table/tbody/tr[25]/td[4]/button[1]"); 
+            By NameField = By.XPath("//*[@id=\"mat-input-0\"]"); 
+            IWebElement UserName = driver.FindElement(NameField);
+
+            //Act
+            addEntityPageObject.CreateUserEntity();
+            offersListPageObject.NavigateToOffersList();
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scrollBy(0, 1000)");
+            Thread.Sleep(4000); 
+            driver.FindElement(CreatedUserEditButton).Click(); 
+            Thread.Sleep(2000);
+
+            //Assert
+            Assert.That(UserName.GetAttribute("value"), Is.EqualTo("Челбос"));
+        }
+
         [Test]
         public void OpenOffersTest()
         {
@@ -23,7 +52,6 @@ namespace GameteqTests
             mainMenu.NavigateToMain();
             mainMenu.TapMenuSwitcher();
             mainMenu.TapOffers();
-            Assert.Pass();
         }
 
         [Test]
@@ -31,7 +59,6 @@ namespace GameteqTests
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
-
             mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
@@ -42,7 +69,6 @@ namespace GameteqTests
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
-
             mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapEditButton();
@@ -53,7 +79,6 @@ namespace GameteqTests
         {
             MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
-
             mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapDeleteButton();
@@ -62,10 +87,8 @@ namespace GameteqTests
         [Test]
         public void TapForTestCheckBoxTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
@@ -76,10 +99,8 @@ namespace GameteqTests
         [Test]
         public void SetNameTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
@@ -90,10 +111,8 @@ namespace GameteqTests
         [Test]
         public void SetKeyTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
@@ -103,10 +122,8 @@ namespace GameteqTests
         [Test]
         public void SelectCategoryTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
@@ -117,10 +134,8 @@ namespace GameteqTests
         [Test]
         public void TapAddCategoryTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
@@ -130,10 +145,8 @@ namespace GameteqTests
         [Test]
         public void TapAddNetworkTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
@@ -156,10 +169,8 @@ namespace GameteqTests
         [Test]
         public void TapAddSegmentsTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
@@ -177,7 +188,7 @@ namespace GameteqTests
             Thread.Sleep(1000);
             addEntity.TapAddCategoryButton();
             addEntity.EnterTextAddButton("test");
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
         }
 
         [Test]
@@ -190,7 +201,7 @@ namespace GameteqTests
             Thread.Sleep(1000);
             addEntity.TapAddCategoryButton();
             addEntity.CancelEnteredTextAddButton("CANCEL_THIS");
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
         }
 
         [Test]
@@ -237,15 +248,13 @@ namespace GameteqTests
         [Test]
         public void SelectNetworkTest()
         {
-            MainMenuPageObject mainMenu = new MainMenuPageObject(driver);
             OffersListPageObject offersList = new OffersListPageObject(driver);
             AddEntityPageObject addEntity = new AddEntityPageObject(driver);
-            mainMenu.NavigateToMain();
             offersList.NavigateToOffersList();
             offersList.TapAddButton();
             Thread.Sleep(1000);
             addEntity.SelectNetwork();
-            Thread.Sleep(6000);
+            Thread.Sleep(1000);
         }
 
         [Test]
@@ -255,7 +264,6 @@ namespace GameteqTests
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
-            Thread.Sleep(1000);
             addEntityPageObject.SelectGroup();
         }
 
@@ -310,35 +318,49 @@ namespace GameteqTests
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
-            addEntityPageObject.TapAddGroupSegmentPinkButton(); 
+            addEntityPageObject.TapAddGroupSegmentPinkButton();
         }
 
         [Test]
-        public void TapDeleteGroupButton()
+        public void TapDeleteGroupButtonTest()
         {
             OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
             addEntityPageObject.TapAddGroupSegmentPinkButton();
-            addEntityPageObject.TapDeleteSegmentButton(); 
+            addEntityPageObject.TapDeleteSegmentButton();
         }
-        
+
         [Test]
-        public void TapAddSegmentButton()
+        public void TapAddSegmentButtonTest()
         {
             OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
             AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
             offersListPageObject.NavigateToOffersList();
-            offersListPageObject.TapAddButton(); 
+            offersListPageObject.TapAddButton();
             addEntityPageObject.TapAddSegmentButton();
         }
 
-
-        [TearDown]
-        public void TearDown()
+        [Test]
+        public void TapDeleteSegmentButtonTest()
         {
-            driver.Quit();
+            By DeleteSegmentButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-content/div/button");
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            addEntityPageObject.TapAddSegmentButton();
+            addEntityPageObject.TapDeleteSegmentButton();
+            addEntityPageObject.IsAllSegmentsDeleted();
+            Thread.Sleep(6000);
+        }
+
+        [Test]
+        public void SaveButtonTest()
+        {
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            addEntityPageObject.CreateUserEntity();
         }
     }
 }
