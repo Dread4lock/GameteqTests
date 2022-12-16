@@ -283,6 +283,26 @@ namespace GameteqTests
             Thread.Sleep(1000);
         }
 
+        [Test]
+        public void TapOrButtonTest()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            addEntityPageObject.TapOrButton();
+        }
+
+        [Test]
+        public void TapAndButtonTest()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            addEntityPageObject.TapAndButton();
+        }
+
         [TearDown]
         public void TearDown()
         {

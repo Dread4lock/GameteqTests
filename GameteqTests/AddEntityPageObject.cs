@@ -36,8 +36,10 @@ namespace GameteqTests
         private readonly By NetworksWord = By.XPath("//*[@id=\"mat-select-0\"]");
         private readonly By GroupWord = By.XPath("//*[@id=\"mat-select-1\"]");
         private readonly By GroupsList = By.XPath("//*[@id=\"cdk-overlay-0\"]/div/div");
-        private readonly By EngineersWord = By.CssSelector("#mat-option-23 > span");  
-
+        private readonly By EngineersWord = By.CssSelector("#mat-option-23 > span");
+        private readonly By OrButtonArea = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/mat-radio-group/mat-radio-button[1]");
+        private readonly By OrButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/mat-radio-group/mat-radio-button[1]/label/div[2]");
+        private readonly By AndButton = By.XPath("/html/body/app-root/mat-sidenav-container/mat-sidenav-content/app-form/form/mat-card[4]/mat-card-content/app-form-segments/mat-card/mat-card-title/mat-radio-group/mat-radio-button[2]/label/div[2]");
         #endregion
 
         public AddEntityPageObject(IWebDriver _driver)
@@ -239,6 +241,37 @@ namespace GameteqTests
             return this;
         }
 
-        
+        public AddEntityPageObject TapOrButton()
+        {
+           driver
+                .Manage()
+                .Timeouts()
+                .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(OrButtonArea)
+                .Click();
+            driver
+                .FindElement(OrButton)
+                .Click();
+            Thread.Sleep(1000);
+
+            return this;
+        }
+        public AddEntityPageObject TapAndButton()
+        {
+            driver
+                 .Manage()
+                 .Timeouts()
+                 .ImplicitWait = TimeSpan.FromSeconds(10);
+            driver
+                .FindElement(OrButtonArea)
+                .Click();
+            driver
+                .FindElement(AndButton)
+                .Click();
+            Thread.Sleep(5000);
+
+            return this;
+        }
     }
 }
