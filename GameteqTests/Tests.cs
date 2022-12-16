@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 
 namespace GameteqTests
 {
@@ -255,8 +256,31 @@ namespace GameteqTests
             offersListPageObject.NavigateToOffersList();
             offersListPageObject.TapAddButton();
             Thread.Sleep(1000);
-            addEntityPageObject.SelectGroup();
-           // Thread.Sleep(4000);
+            addEntityPageObject.SelectGroup(); 
+        }
+
+        [Test]
+        public void TapAddSegmentTest()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            Thread.Sleep(1000); 
+            addEntityPageObject.TapAddSegmentsButton();
+        }
+
+        [Test]
+        public void CreateNewSegmentTest()
+        {
+            OffersListPageObject offersListPageObject = new OffersListPageObject(driver);
+            AddEntityPageObject addEntityPageObject = new AddEntityPageObject(driver);
+            offersListPageObject.NavigateToOffersList();
+            offersListPageObject.TapAddButton();
+            Thread.Sleep(1000);
+            addEntityPageObject.TapAddSegmentsButton();
+            addEntityPageObject.CreateNewEntityButton("CHECK");
+            Thread.Sleep(1000);
         }
 
         [TearDown]

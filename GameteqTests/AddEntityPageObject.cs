@@ -36,10 +36,7 @@ namespace GameteqTests
         private readonly By NetworksWord = By.XPath("//*[@id=\"mat-select-0\"]");
         private readonly By GroupWord = By.XPath("//*[@id=\"mat-select-1\"]");
         private readonly By GroupsList = By.XPath("//*[@id=\"cdk-overlay-0\"]/div/div");
-        private readonly By EngineersWord = By.CssSelector("#mat-option-23 > span"); 
-
-        
-        // private readonly By NetworksList = By.XPath("//*[@id=\"mat-select-0\"]");
+        private readonly By EngineersWord = By.CssSelector("#mat-option-23 > span");  
 
         #endregion
 
@@ -142,7 +139,7 @@ namespace GameteqTests
                   .ImplicitWait = TimeSpan.FromSeconds(10);
             driver
                 .FindElement(AddSegmentsButton)
-                .Click();
+                .Click(); 
             return this;
         }
 
@@ -237,18 +234,11 @@ namespace GameteqTests
 
             driver
                 .FindElement(EngineersWord)
-                .Click();
-
-            //driver
-            //    .FindElement(GroupsList)
-            //    .Click();                   //- asdaf
-            //Thread.Sleep(1000);
-
-            //driver
-            //    .FindElement(EngineersWord)
-            //    .Click();
-            Thread.Sleep(4000);
+                .Click(); 
+            Thread.Sleep(1000);
             return this;
         }
+
+        
     }
 }
